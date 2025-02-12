@@ -1,6 +1,5 @@
 package net.serlith.zluket.controllers.rest
 
-import jakarta.servlet.http.HttpServletRequest
 import net.serlith.zluket.databases.PasteRepository
 import net.serlith.zluket.databases.types.PasteModel
 import org.springframework.beans.factory.annotation.Autowired
@@ -32,13 +31,13 @@ constructor(
         if (content == null || content.isBlank()) return ResponseEntity.noContent().build()
 
         var truncated = false
-        var content = content
-        if (content.length > this.contentMaxLength) {
-            content = content.substring(0, contentMaxLength)
+        var contentVar = content
+        if (contentVar.length > this.contentMaxLength) {
+            contentVar = contentVar.substring(0, contentMaxLength)
             truncated = true
         }
 
-        val paste = this.pasteRepository.save(PasteModel(content))
+        val paste = this.pasteRepository.save(PasteModel(contentVar))
         return ResponseEntity.ok(mapOf(
             "uuid" to paste.uuid,
             "truncated" to truncated,
