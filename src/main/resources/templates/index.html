@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zluqet - New Paste</title>
+    <th:block th:insert="~{cold/head.html}"></th:block>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/paste" class="logo">
+                <span>Zluqet</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <form method="post">
+            <label>
+                <textarea name="content" placeholder="// Start typing your code here..." autofocus></textarea>
+            </label>
+            <div class="actions">
+                <button type="submit" class="nav-button">Save Paste</button>
+            </div>
+        </form>
+    </main>
+    <th:block th:insert="~{cold/footer.html}"></th:block>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zluqet - {{ paste.uuid }}</title>
+    <meta name="robots" content="noindex, nofollow">
+    <th:block th:insert="~{cold/head.html}"></th:block>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/paste" class="logo">Zluqet</a>
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="window.location.href='/'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="arcs"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    New Paste
+                </button>
+    
+                <button class="nav-button" onclick="window.location.href='/edit/{{ paste.uuid }}'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M5 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V6.5L9.5 2H5zm4 1.5L13.5 6H9V3.5z"/>
+                    </svg>
+                    Edit
+                </button>
+    
+                <button class="nav-button" onclick="copyToClipboard()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                    </svg>
+                    Share
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+        function copyToClipboard() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+    </script>
+    
+    <main class="container">
+        <div class="paste-header">
+            <div class="paste-meta">
+                <span class="paste-id">Paste ID: {{ paste.uuid }}</span>
+                <span class="paste-time">Created: {{ paste.created_at.strftime('%b %d, %Y %H:%M') }}</span>
+            </div>
+            <div class="language-tag">
+                <span>{{ language }}</span>
+            </div>
+        </div>
+
+        <div class="code-container">
+            <pre><code class="language-{{ language }} hljs">{{ paste.content }}</code></pre>
+        </div>
+    </main>
+    <th:block th:insert="~{cold/footer.html}"></th:block>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/all.min.js"></script>    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+</html>

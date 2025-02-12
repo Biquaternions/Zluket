@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zluqet - Edit</title>
+    <meta name="robots" content="noindex, nofollow">
+    <th:block th:insert="~{cold/head.html}"></th:block>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="/paste" class="logo">Zluqet</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <form action="/edit/{{ paste.uuid }}" method="POST">
+            <textarea name="content">{{ paste.content }}</textarea>
+            <button type="submit" class="nav-button">Save Paste</button>
+        </form>
+    </main>
+    <th:block th:insert="~{cold/footer.html}"></th:block>
+</body>
+</html>

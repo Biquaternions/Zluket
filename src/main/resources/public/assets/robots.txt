@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /paste/
+Disallow: /raw/
+Disallow: /edit/
