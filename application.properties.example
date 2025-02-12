@@ -1,0 +1,4 @@
+# Can also be run as CLI arguments: java -jar Zluket.jar --spring.datasource.url="..." ...
+spring.datasource.url=jdbc:mysql://my.cool.db:3306/database
+spring.datasource.username=your_username
+spring.datasource.password=your_password

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Zluqet - {{ paste.uuid }}</title>
+    <title th:text="'Zluquet - ' + ${paste.uuid}">Title...</title>
     <meta name="robots" content="noindex, nofollow">
     <th:block th:insert="~{cold/head.html}"></th:block>
 </head>
@@ -15,7 +15,7 @@
                     New Paste
                 </button>
     
-                <button class="nav-button" onclick="window.location.href='/edit/{{ paste.uuid }}'">
+                <button class="nav-button" th:attr="onclick=|window.location.href='/edit/' + ${paste.uuid}|">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M5 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V6.5L9.5 2H5zm4 1.5L13.5 6H9V3.5z"/>
                     </svg>
@@ -44,16 +44,16 @@
     <main class="container">
         <div class="paste-header">
             <div class="paste-meta">
-                <span class="paste-id">Paste ID: {{ paste.uuid }}</span>
-                <span class="paste-time">Created: {{ paste.created_at.strftime('%b %d, %Y %H:%M') }}</span>
+                <span class="paste-id" th:text="'Paste ID: ' + ${paste.uuid}">Paste ID...</span>
+                <span class="paste-time" th:text="'Created: ' + ${paste.created}">Created...</span>
             </div>
             <div class="language-tag">
-                <span>{{ language }}</span>
+                <span th:text="${language}">Language...</span>
             </div>
         </div>
 
         <div class="code-container">
-            <pre><code class="language-{{ language }} hljs">{{ paste.content }}</code></pre>
+            <pre><code th:class="'language-' + ${language} + ' hljs'" th:text="${paste.content}">Content...</code></pre>
         </div>
     </main>
     <th:block th:insert="~{cold/footer.html}"></th:block>

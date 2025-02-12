@@ -3,6 +3,8 @@ package net.serlith.zluket.controllers.rest
 import net.serlith.zluket.databases.PasteRepository
 import net.serlith.zluket.databases.types.PasteModel
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.InputStreamResource
 import org.springframework.data.rest.webmvc.ResourceNotFoundException
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -43,7 +45,6 @@ constructor(
     }
 
     // FIXME: Doesn't actually dupe/edit the paste, it creates a new one from a form
-    @Suppress("MaybeUnused")
     @PostMapping("/edit/{uuid}")
     @Throws(ResourceNotFoundException::class)
     fun postEditPaste(@PathVariable uuid: UUID, @RequestBody form: Map<String, String>): RedirectView {
@@ -52,5 +53,14 @@ constructor(
         val new = this.pasteRepository.save(PasteModel(content))
         return RedirectView("/paste/${new.uuid}")
     }
+
+    @GetMapping("/favicon.ico")
+    fun getFavicon(): ResponseEntity<InputStreamResource> {
+        val icon = ClassPathResource("public/logo/logo.png")
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(InputStreamResource(icon.inputStream))
+    }
+
+    @GetMapping("/error")
+    fun getError() = RedirectView("/paste")
 
 }

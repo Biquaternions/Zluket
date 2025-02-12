@@ -14,8 +14,10 @@
     </nav>
 
     <main class="container">
-        <form action="/edit/{{ paste.uuid }}" method="POST">
-            <textarea name="content">{{ paste.content }}</textarea>
+        <form th:action="@{/edit/${paste.uuid}}" method="POST">
+            <label>
+                <textarea name="content" th:text="${paste.content}">Content...</textarea>
+            </label>
             <button type="submit" class="nav-button">Save Paste</button>
         </form>
     </main>
